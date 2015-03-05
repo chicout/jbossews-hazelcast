@@ -1,7 +1,7 @@
 ---
 Name: jbossews-hazelcast
 Cartridge-Short-Name: JBOSSEWS
-Cartridge-Vendor: redhat
+Cartridge-Vendor: fico
 Cartridge-Version: 0.0.9
 Compatible-Versions: []
 Display-Name: Tomcat 7 Hazelcast (JBoss EWS 2.0 Hazelcast)
