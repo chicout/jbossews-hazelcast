@@ -41,13 +41,20 @@ isrunning() {
 
 # Check if the server http port is up
 function ishttpup() {
-    let count=0
+    count=0
     while [ ${count} -lt 64 ]
     do
-        if /usr/sbin/lsof -P -n -i "@${OPENSHIFT_JBOSSEWS_IP}:${OPENSHIFT_JBOSSEWS_HTTP_PORT}" | grep "(LISTEN)" > /dev/null; then
+        if echo 2> /dev/null > "/dev/tcp/${OPENSHIFT_JBOSSEWS_IP}/${OPENSHIFT_JBOSSEWS_HTTP_PORT}"; then
             echo "Found ${OPENSHIFT_JBOSSEWS_IP}:${OPENSHIFT_JBOSSEWS_HTTP_PORT} listening port"
             return 0
         fi
+        # if the process failed to start, error out immediately
+        # rather than waiting for the timeout on the port being available.
+        jbpid=$(cat $JBOSS_PID_FILE);
+        if ! ps | grep -v grep | grep $jbpid > /dev/null; then
+          return 2
+        fi
+
         let count=${count}+1
         sleep 2
     done
