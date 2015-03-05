@@ -9,6 +9,7 @@ Description: JBoss Enterprise Web Server is the enterprise-class Java web contai
   for large-scale lightweight web applications based on Tomcat 7. Build and deploy
   JSPs and Servlets in the cloud.
 Version: '2.0'
+Source-Url: https://github.com/chicout/jbossews-hazelcast/archive/master.zip
 Versions:
 - '2.0'
 - '1.0'
